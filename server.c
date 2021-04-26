@@ -88,6 +88,6 @@ int main(void) {
 
     // Rendevouz Descriptor schließen
     close(rfd);
-    
+
     return EXIT_SUCCESS;
 }
