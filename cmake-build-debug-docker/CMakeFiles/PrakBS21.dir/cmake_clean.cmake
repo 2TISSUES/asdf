@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/PrakBS21.dir/main.c.o"
+  "CMakeFiles/PrakBS21.dir/server.c.o"
   "PrakBS21.pdb"
   "PrakBS21"
 )

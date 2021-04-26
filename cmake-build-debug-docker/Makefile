@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/PrakBS21Team13
+CMAKE_SOURCE_DIR = /tmp/tmp.VzsFeZdMTv
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/PrakBS21Team13/cmake-build-debug-docker
+CMAKE_BINARY_DIR = /tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21Team13/cmake-build-debug-docker/CMakeFiles /tmp/PrakBS21Team13/cmake-build-debug-docker/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles /tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21Team13/cmake-build-debug-docker/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,32 @@ PrakBS21/fast:
 	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/build
 .PHONY : PrakBS21/fast
 
-main.o: main.c.o
+server.o: server.c.o
 
-.PHONY : main.o
+.PHONY : server.o
 
 # target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.o
-.PHONY : main.c.o
+server.c.o:
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/server.c.o
+.PHONY : server.c.o
 
-main.i: main.c.i
+server.i: server.c.i
 
-.PHONY : main.i
+.PHONY : server.i
 
 # target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.i
-.PHONY : main.c.i
+server.c.i:
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/server.c.i
+.PHONY : server.c.i
 
-main.s: main.c.s
+server.s: server.c.s
 
-.PHONY : main.s
+.PHONY : server.s
 
 # target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.s
-.PHONY : main.c.s
+server.c.s:
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/server.c.s
+.PHONY : server.c.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... PrakBS21"
 	@echo "... edit_cache"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 
