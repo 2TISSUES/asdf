@@ -78,7 +78,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.VzsFeZdMTv/server.c">
+		<Unit filename="/tmp/tmp.VzsFeZdMTv/keyVal.c">
+			<Option target="PrakBS21"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VzsFeZdMTv/keyVal.h">
+			<Option target="PrakBS21"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VzsFeZdMTv/main.c">
+			<Option target="PrakBS21"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VzsFeZdMTv/sub.c">
+			<Option target="PrakBS21"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VzsFeZdMTv/sub.h">
 			<Option target="PrakBS21"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.VzsFeZdMTv/CMakeLists.txt">

@@ -57,41 +57,93 @@ include CMakeFiles/PrakBS21.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/PrakBS21.dir/flags.make
 
-CMakeFiles/PrakBS21.dir/server.c.o: CMakeFiles/PrakBS21.dir/flags.make
-CMakeFiles/PrakBS21.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/PrakBS21.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/PrakBS21.dir/server.c.o   -c /tmp/tmp.VzsFeZdMTv/server.c
+CMakeFiles/PrakBS21.dir/main.c.o: CMakeFiles/PrakBS21.dir/flags.make
+CMakeFiles/PrakBS21.dir/main.c.o: ../main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/PrakBS21.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/PrakBS21.dir/main.c.o   -c /tmp/tmp.VzsFeZdMTv/main.c
 
-CMakeFiles/PrakBS21.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PrakBS21.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.VzsFeZdMTv/server.c > CMakeFiles/PrakBS21.dir/server.c.i
+CMakeFiles/PrakBS21.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PrakBS21.dir/main.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.VzsFeZdMTv/main.c > CMakeFiles/PrakBS21.dir/main.c.i
 
-CMakeFiles/PrakBS21.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PrakBS21.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.VzsFeZdMTv/server.c -o CMakeFiles/PrakBS21.dir/server.c.s
+CMakeFiles/PrakBS21.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PrakBS21.dir/main.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.VzsFeZdMTv/main.c -o CMakeFiles/PrakBS21.dir/main.c.s
 
-CMakeFiles/PrakBS21.dir/server.c.o.requires:
+CMakeFiles/PrakBS21.dir/main.c.o.requires:
 
-.PHONY : CMakeFiles/PrakBS21.dir/server.c.o.requires
+.PHONY : CMakeFiles/PrakBS21.dir/main.c.o.requires
 
-CMakeFiles/PrakBS21.dir/server.c.o.provides: CMakeFiles/PrakBS21.dir/server.c.o.requires
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/server.c.o.provides.build
-.PHONY : CMakeFiles/PrakBS21.dir/server.c.o.provides
+CMakeFiles/PrakBS21.dir/main.c.o.provides: CMakeFiles/PrakBS21.dir/main.c.o.requires
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.o.provides.build
+.PHONY : CMakeFiles/PrakBS21.dir/main.c.o.provides
 
-CMakeFiles/PrakBS21.dir/server.c.o.provides.build: CMakeFiles/PrakBS21.dir/server.c.o
+CMakeFiles/PrakBS21.dir/main.c.o.provides.build: CMakeFiles/PrakBS21.dir/main.c.o
+
+
+CMakeFiles/PrakBS21.dir/sub.c.o: CMakeFiles/PrakBS21.dir/flags.make
+CMakeFiles/PrakBS21.dir/sub.c.o: ../sub.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/PrakBS21.dir/sub.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/PrakBS21.dir/sub.c.o   -c /tmp/tmp.VzsFeZdMTv/sub.c
+
+CMakeFiles/PrakBS21.dir/sub.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PrakBS21.dir/sub.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.VzsFeZdMTv/sub.c > CMakeFiles/PrakBS21.dir/sub.c.i
+
+CMakeFiles/PrakBS21.dir/sub.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PrakBS21.dir/sub.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.VzsFeZdMTv/sub.c -o CMakeFiles/PrakBS21.dir/sub.c.s
+
+CMakeFiles/PrakBS21.dir/sub.c.o.requires:
+
+.PHONY : CMakeFiles/PrakBS21.dir/sub.c.o.requires
+
+CMakeFiles/PrakBS21.dir/sub.c.o.provides: CMakeFiles/PrakBS21.dir/sub.c.o.requires
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/sub.c.o.provides.build
+.PHONY : CMakeFiles/PrakBS21.dir/sub.c.o.provides
+
+CMakeFiles/PrakBS21.dir/sub.c.o.provides.build: CMakeFiles/PrakBS21.dir/sub.c.o
+
+
+CMakeFiles/PrakBS21.dir/keyVal.c.o: CMakeFiles/PrakBS21.dir/flags.make
+CMakeFiles/PrakBS21.dir/keyVal.c.o: ../keyVal.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/PrakBS21.dir/keyVal.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/PrakBS21.dir/keyVal.c.o   -c /tmp/tmp.VzsFeZdMTv/keyVal.c
+
+CMakeFiles/PrakBS21.dir/keyVal.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/PrakBS21.dir/keyVal.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/tmp.VzsFeZdMTv/keyVal.c > CMakeFiles/PrakBS21.dir/keyVal.c.i
+
+CMakeFiles/PrakBS21.dir/keyVal.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/PrakBS21.dir/keyVal.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/tmp.VzsFeZdMTv/keyVal.c -o CMakeFiles/PrakBS21.dir/keyVal.c.s
+
+CMakeFiles/PrakBS21.dir/keyVal.c.o.requires:
+
+.PHONY : CMakeFiles/PrakBS21.dir/keyVal.c.o.requires
+
+CMakeFiles/PrakBS21.dir/keyVal.c.o.provides: CMakeFiles/PrakBS21.dir/keyVal.c.o.requires
+	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/keyVal.c.o.provides.build
+.PHONY : CMakeFiles/PrakBS21.dir/keyVal.c.o.provides
+
+CMakeFiles/PrakBS21.dir/keyVal.c.o.provides.build: CMakeFiles/PrakBS21.dir/keyVal.c.o
 
 
 # Object files for target PrakBS21
 PrakBS21_OBJECTS = \
-"CMakeFiles/PrakBS21.dir/server.c.o"
+"CMakeFiles/PrakBS21.dir/main.c.o" \
+"CMakeFiles/PrakBS21.dir/sub.c.o" \
+"CMakeFiles/PrakBS21.dir/keyVal.c.o"
 
 # External object files for target PrakBS21
 PrakBS21_EXTERNAL_OBJECTS =
 
-PrakBS21: CMakeFiles/PrakBS21.dir/server.c.o
+PrakBS21: CMakeFiles/PrakBS21.dir/main.c.o
+PrakBS21: CMakeFiles/PrakBS21.dir/sub.c.o
+PrakBS21: CMakeFiles/PrakBS21.dir/keyVal.c.o
 PrakBS21: CMakeFiles/PrakBS21.dir/build.make
 PrakBS21: CMakeFiles/PrakBS21.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable PrakBS21"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.VzsFeZdMTv/cmake-build-debug-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable PrakBS21"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PrakBS21.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -99,7 +151,9 @@ CMakeFiles/PrakBS21.dir/build: PrakBS21
 
 .PHONY : CMakeFiles/PrakBS21.dir/build
 
-CMakeFiles/PrakBS21.dir/requires: CMakeFiles/PrakBS21.dir/server.c.o.requires
+CMakeFiles/PrakBS21.dir/requires: CMakeFiles/PrakBS21.dir/main.c.o.requires
+CMakeFiles/PrakBS21.dir/requires: CMakeFiles/PrakBS21.dir/sub.c.o.requires
+CMakeFiles/PrakBS21.dir/requires: CMakeFiles/PrakBS21.dir/keyVal.c.o.requires
 
 .PHONY : CMakeFiles/PrakBS21.dir/requires
 
