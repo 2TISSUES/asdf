@@ -2,27 +2,73 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <sys/socket.h>
+//#include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <sys/shm.h>
+#include <sys/ipc.h>
+#include <sys/wait.h>
 
-#define BUFFSIZE 1024 // Größe des Buffers
-#define STORAGESIZE 100 // Größe des Storage
+#define BUFFSIZE 256 // Größe des Buffers
+#define STORAGESIZE 5 // Größe des Storage
 #define TRUE 1
 #define ENDLOSSCHLEIFE 1
 #define PORT 5678
+#define SEGSIZE 10000
 
-typedef struct storage {
+typedef struct kv_storage {
     char key[BUFFSIZE];
     char value[BUFFSIZE];
     int index;
-} storage, *storage_p;
+} kv_storage, *kv_storage_p;
+
+kv_storage storage[STORAGESIZE];
 
 int main(void) {
     int rfd; // Rendevouz-Descriptor
     int cfd; // Verbindungs-Descriptor
+
+    int shm_id;
+    kv_storage *shm_seg; /*  id für das Shared Memory Segment        */
+    /*  mit *shar_mem kann der im Shared Memory */
+    /*  gespeicherte Wert verändert werden      */
+    int pid;
+
+    /* Nun wird das Shared Memory Segment angefordert, an den Prozess   */
+    /* angehängt, und der dort gespreicherte Wert auf 0 gesetzt         */
+    shm_id = shmget(IPC_PRIVATE, SEGSIZE, IPC_CREAT | 0600);
+    if (shm_id < 0) {
+        fprintf(stderr, "shmget: %s", strerror(errno));
+    }
+
+    shm_seg = (kv_storage *) shmat(shm_id, NULL, 0);
+    if (shm_seg == (void *) -1) {
+        fprintf(stderr, "shmat: %s", strerror(errno));
+        exit(1);
+    }
+
+    for (int i = 0; i < 5; i++) {
+        shm_seg[i].index = i;
+        strcpy(shm_seg[i].key, " ");
+        strcpy(shm_seg[i].value, "*");
+    }
+
+    // BEGIN testdaten für storage
+    shm_seg[0].index = 0;
+    strcpy(shm_seg[0].key, "KEY1");
+    strcpy(shm_seg[0].value, "VALUE1");
+
+    shm_seg[1].index = 1;
+    strcpy(shm_seg[1].key, "KEY2");
+    strcpy(shm_seg[1].value, "VALUE2");
+
+    shm_seg[2].index = 2;
+    strcpy(shm_seg[2].key, "KEY3");
+    strcpy(shm_seg[2].value, "VALUE3");
+
+    // ENDE testdaten für storage
 
     struct sockaddr_in client; // Socketadresse eines Clients
     socklen_t client_len; // Länge der Client-Daten
@@ -31,28 +77,18 @@ int main(void) {
     int bytes_read; // Anzahl der Bytes, die der Client geschickt hat
 
 
-    // testdaten für storage
-    storage data1 = {"key1", "value1", 1};
-    storage data2 = {"key2", "value2", 2};
-    storage data3 = {"key3", "value3", 3};
-    storage data4 = {"key4", "value4", 4};
-
-
-
     // Socket erstellen
     rfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (rfd < 0 ){
-        fprintf(stderr, "socket konnte nicht erstellt werden\n");
+    if (rfd < 0) {
+        fprintf(stderr, "socket: %s\n", strerror(errno));
         exit(-1);
     }
 
-
     // Socket Optionen setzen für schnelles wiederholtes Binden der Adresse
     int option = 1;
-    if(setsockopt(rfd, SOL_SOCKET, SO_REUSEADDR, (const void *) &option, sizeof(int)) < 0) {
-        fprintf(stderr, "reuse option kann auf socket nicht gesetzt werden.\n");
+    if (setsockopt(rfd, SOL_SOCKET, SO_REUSEADDR, (const void *) &option, sizeof(int)) < 0) {
+        fprintf(stderr, "setsockopt: %s\n", strerror(errno));
     }
-
 
     // Socket binden
     struct sockaddr_in server;
@@ -60,16 +96,15 @@ int main(void) {
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htons(PORT);
     int brt = bind(rfd, (struct sockaddr *) &server, sizeof(server));
-    if (brt < 0 ){
-        fprintf(stderr, "socket konnte nicht gebunden werden\n");
+    if (brt < 0) {
+        fprintf(stderr, "bind: %s\n", strerror(errno));
         exit(-1);
     }
 
-
     // Socket lauschen lassen
     int lrt = listen(rfd, 5);
-    if (lrt < 0 ){
-        fprintf(stderr, "socket konnte nicht auf listen gesetzt werden\n", strerror(errno));
+    if (lrt < 0) {
+        fprintf(stderr, "listen: %s\n", strerror(errno));
         exit(-1);
     }
 
@@ -77,37 +112,68 @@ int main(void) {
 
         // Verbindung eines Clients wird entgegengenommen
         cfd = accept(rfd, (struct sockaddr *) &client, &client_len);
-        if(cfd < 0){
-            fprintf(stderr, "verbindung zum client konnte nicht hergestellt werden\n");
+        if (cfd < 0) {
+            fprintf(stderr, "accept: %s\n", strerror(errno));
         } else {
-            printf("verbindung von %s, port %d\n", inet_ntop(AF_INET, &client.sin_addr, buff, sizeof(buff)), ntohl(client.sin_port));
+            printf("verbindung zu %s hergestellt\n", inet_ntop(AF_INET, &client.sin_addr, buff, sizeof(buff)));
         }
 
-        // Lesen von Daten, die der Client schickt
-        if((bytes_read = read(cfd, in, BUFFSIZE)) < 0) {
-            fprintf(stderr, "fehler beim lesen der daten vom client", strerror(errno));
+        pid = fork();
+        if (pid < 0) {
+            fprintf(stderr, "fork: %s\n", strerror(errno));
+            exit(1);
         }
 
-        // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
-        while (bytes_read > 0) {
-            if(strncmp("QUIT", in, 4) == 0) {
-                printf("QUIT wird ausgeführt\n");
-                if(close(cfd) < 0) {
-                    fprintf(stderr, "fehler beim schließen der verbindung zum server\n", strerror(errno));
-                }
-            } else if(strncmp("GET", in, 3) == 0) {
-                printf("GET key wird ausgeführt...\n");
-            } else if(strncmp("PUT", in, 3) == 0) {
-                printf("PUT key value wird ausgeführt...\n");
-            } else if(strncmp("DEL", in, 3) == 0) {
-                printf("DELETE key wird ausgeführt...\n");
+        if (pid == 0) { // Kindprozess
+            printf("Im Kindprozess\n");
+            // Lesen von Daten, die der Client schickt
+            if ((bytes_read = read(cfd, in, BUFFSIZE)) < 0) {
+                fprintf(stderr, "read: %s\n", strerror(errno));
             }
 
-            printf("sending back the %d bytes I received...\n", bytes_read);
-            write(cfd, in, bytes_read);
-            bytes_read = read(cfd, in, BUFFSIZE);
+            // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
+            while (bytes_read > 0) {
+                if (strncmp("QUIT", in, 4) == 0) {
+                    printf("QUIT wird ausgeführt\n");
+                    if (close(cfd) < 0) {
+                        fprintf(stderr, "close: %s\n", strerror(errno));
+                    }
+                } else if (strncmp("GET", in, 3) == 0) {
+                    printf("GET key wird ausgeführt...\n");
+                    printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[0].index, shm_seg[0].key, shm_seg[0].value);
+                } else if (strncmp("PUT", in, 3) == 0) {
+                    printf("PUT key value wird ausgeführt...\n");
+                    printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[1].index, shm_seg[1].key, shm_seg[1].value);
+                } else if (strncmp("DEL", in, 3) == 0) {
+                    printf("DELETE key wird ausgeführt...\n");
+                    printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[2].index, shm_seg[2].key, shm_seg[2].value);
+                } else if (strncmp("CHANGE", in, 6) == 0) {
+                    printf("Ändere Daten bei Index 0....\n");
+                    strcpy(shm_seg[0].key, "LMAO");
+                    strcpy(shm_seg[0].value, "IT WORKS");
+                }
+
+                printf("sending back the %d bytes I received...\n", bytes_read);
+                write(cfd, in, bytes_read);
+                bytes_read = read(cfd, in, BUFFSIZE);
+            }
+            close(cfd);
         }
-        close(cfd);
+    }
+
+    if (pid > 0) {
+        // Vaterprozess
+        printf("Im Vaterprozess\n");
+    }
+
+    if (shmdt(shm_seg) == -1) {
+        perror("shmdt");
+        exit(1);
+    }
+
+    if (shmctl(shm_id, IPC_RMID, 0) == -1) {
+        fprintf(stderr, "shmctl %s", strerror(errno));
+        exit(1);
     }
 
     // Rendevouz Descriptor schließen
