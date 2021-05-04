@@ -2,22 +2,14 @@
 <project version="4">
   <component name="PublishConfigData" serverName="Docker (768859a4-fcff-4cf7-87df-0ef7545fea7e)" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="Docker (4b8b3fe7-b214-4641-9236-83e2121baec0)">
+      <paths name="Doc (a5879287-8e2e-4ce9-9854-6408efcbd9c9)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.VzsFeZdMTv" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/tmp.QrAEE7omqu" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-docker" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-docker" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-doc" />
           </excludedPaths>
-        </serverdata>
-      </paths>
-      <paths name="Docker (768859a4-fcff-4cf7-87df-0ef7545fea7e)">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/tmp/PrakBS21Team13" local="$PROJECT_DIR$" />
-          </mappings>
         </serverdata>
       </paths>
     </serverData>
