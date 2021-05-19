@@ -1,0 +1,3 @@
+/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/rebuild_cache.dir
+/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/PrakBS21Team13.dir
+/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/edit_cache.dir
