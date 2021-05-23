@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/PrakBS21
+CMAKE_SOURCE_DIR = /tmp/PrakBS21/team13
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/PrakBS21/cmake-build-debug-docker
+CMAKE_BINARY_DIR = /tmp/PrakBS21/team13/cmake-build-debug-docker
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/cmake-build-debug-docker/CMakeFiles /tmp/PrakBS21/cmake-build-debug-docker/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/cmake-build-debug-docker/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named PrakBS21
+# Target rules for targets named PrakBS21Team13
 
 # Build rule for target.
-PrakBS21: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PrakBS21
-.PHONY : PrakBS21
+PrakBS21Team13: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 PrakBS21Team13
+.PHONY : PrakBS21Team13
 
 # fast build rule for target.
-PrakBS21/fast:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/build
-.PHONY : PrakBS21/fast
-
-keyVal.o: keyVal.c.o
-
-.PHONY : keyVal.o
-
-# target to build an object file
-keyVal.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/keyVal.c.o
-.PHONY : keyVal.c.o
-
-keyVal.i: keyVal.c.i
-
-.PHONY : keyVal.i
-
-# target to preprocess a source file
-keyVal.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/keyVal.c.i
-.PHONY : keyVal.c.i
-
-keyVal.s: keyVal.c.s
-
-.PHONY : keyVal.s
-
-# target to generate assembly for a file
-keyVal.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/keyVal.c.s
-.PHONY : keyVal.c.s
+PrakBS21Team13/fast:
+	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/build
+.PHONY : PrakBS21Team13/fast
 
 main.o: main.c.o
 
@@ -156,7 +129,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.o
+	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -165,7 +138,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.i
+	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -174,35 +147,8 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/main.c.s
+	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.s
 .PHONY : main.c.s
-
-sub.o: sub.c.o
-
-.PHONY : sub.o
-
-# target to build an object file
-sub.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/sub.c.o
-.PHONY : sub.c.o
-
-sub.i: sub.c.i
-
-.PHONY : sub.i
-
-# target to preprocess a source file
-sub.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/sub.c.i
-.PHONY : sub.c.i
-
-sub.s: sub.c.s
-
-.PHONY : sub.s
-
-# target to generate assembly for a file
-sub.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21.dir/build.make CMakeFiles/PrakBS21.dir/sub.c.s
-.PHONY : sub.c.s
 
 # Help Target
 help:
@@ -211,17 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... PrakBS21"
+	@echo "... PrakBS21Team13"
 	@echo "... edit_cache"
-	@echo "... keyVal.o"
-	@echo "... keyVal.i"
-	@echo "... keyVal.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... sub.o"
-	@echo "... sub.i"
-	@echo "... sub.s"
 .PHONY : help
 
 

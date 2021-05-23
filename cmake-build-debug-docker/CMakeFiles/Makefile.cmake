@@ -95,5 +95,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/PrakBS21.dir/DependInfo.cmake"
+  "CMakeFiles/PrakBS21Team13.dir/DependInfo.cmake"
   )
