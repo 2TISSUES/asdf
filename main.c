@@ -16,3 +16,11 @@
 #define ENDLOSSCHLEIFE 1
 #define PORT 5678
 #define SEGSIZE 10000
+
+typedef struct kv_storage {
+    char key[BUFFSIZE];
+    char value[BUFFSIZE];
+    int index;
+} kv_storage, *kv_storage_p;
+
+kv_storage storage[STORAGESIZE];
