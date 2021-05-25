@@ -48,7 +48,7 @@ int main(void) {
         exit(1);
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i <= 5; i++) {
         shm_seg[i].index = i;
         strcpy(shm_seg[i].key, " ");
         strcpy(shm_seg[i].value, "*");
@@ -150,6 +150,19 @@ int main(void) {
                     printf("Ändere Daten bei Index 0....\n");
                     strcpy(shm_seg[0].key, "LMAO");
                     strcpy(shm_seg[0].value, "IT WORKS");
+                } else if (strncmp("ADD", in, 3) == 0) {
+                    int i;
+                    for(i=0; i<=5; i++) {
+                        printf("%d\n", i);
+                        //if ((shm_seg[i].key == " ") && (shm_seg[i].value == "*")) {
+                        if (shm_seg[i].key == " ") {
+                            printf("Index nicht gefüllt\n");
+                            printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[i].index, shm_seg[i].key, shm_seg[i].value);
+                        } else {
+                            printf("Index gefüllt\n");
+                            printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[i].index, shm_seg[i].key, shm_seg[i].value);
+                        }
+                    }
                 }
 
                 printf("sending back the %d bytes I received...\n", bytes_read);
