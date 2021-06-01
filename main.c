@@ -85,7 +85,7 @@ int main(void) {
 
     // Socket Optionen setzen für schnelles wiederholtes Binden der Adresse
     int option = 1;
-    if (setsockopt(cfd, SOL_SOCKET, SO_REUSEADDR, (const void *) &option, sizeof(int)) < 0) {
+    if (setsockopt(rfd, SOL_SOCKET, SO_REUSEADDR, (const void *) &option, sizeof(int)) < 0) {
         fprintf(stderr, "setsockopt: %s\n", strerror(errno));
     }
 
@@ -98,12 +98,6 @@ int main(void) {
     if (brt < 0) {
         fprintf(stderr, "bind: %s\n", strerror(errno));
         exit(-1);
-    }
-
-    int yes=1;
-    if (setsockopt(cfd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof yes) == -1) {
-        perror("setsockopt");
-        exit(1);
     }
 
     // Socket lauschen lassen
@@ -137,8 +131,21 @@ int main(void) {
             }
 
             in[strcspn(in, "\r\n")] = 0;
-            char befehl[BUFFSIZE];
-            strcpy(befehl, strtok(in, " \0"));
+
+            char * befehl;
+            char * key;
+            char * value;
+
+            befehl = strtok(in, " \0");
+            key = strtok(NULL, " ");
+            value = strtok(NULL, "\0");
+
+
+            printf("befehl %s\n", befehl);
+            printf("key %s\n", key);
+            printf("value %s\n", value);
+
+
 
             // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
             while (bytes_read > 0) {
@@ -149,7 +156,7 @@ int main(void) {
                     }
                 } else if (strncmp("GET", in, 3) == 0) {
                     printf("GET key wird ausgeführt...\n");
-                    printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[0].index, shm_seg[0].key, shm_seg[0].value);
+                    printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[3].index, shm_seg[3].key, shm_seg[3].value);
                 } else if (strncmp("PUT", in, 3) == 0) {
                     printf("PUT key value wird ausgeführt...\n");
                     printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[1].index, shm_seg[1].key, shm_seg[1].value);
@@ -161,8 +168,7 @@ int main(void) {
                     strcpy(shm_seg[0].key, "LMAO");
                     strcpy(shm_seg[0].value, "IT WORKS");
                 } else if (strncmp("ADD", in, 3) == 0) {
-                    int i;
-                    for (i = 0; i <= 5; i++) {
+                    for (int i = 0; i <= 5; i++) {
                         char str1[] = " ";
                         char str2[] = "*";
                         if ((strcmp(shm_seg[i].key, str1) != 0) && (strcmp(shm_seg[i].value, str2) != 0)) {
@@ -171,16 +177,13 @@ int main(void) {
                             printf("Index nicht gefüllt\n");
                             printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[i].index, shm_seg[i].key,
                                    shm_seg[i].value);
+                            strcpy(shm_seg[i].key, key);
+                            strcpy(shm_seg[i].value, value);
                             break;
                         }
                     }
                 }
-
-                printf("sending back the %d bytes I received...\n", bytes_read);
-                write(cfd, in, bytes_read);
                 bytes_read = read(cfd, in, BUFFSIZE);
-
-                printf("bla %s", befehl);
             }
             close(cfd);
         }
