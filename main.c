@@ -7,21 +7,14 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <errno.h>
-#include <sys/shm.h>
-#include <sys/ipc.h>
 #include <sys/wait.h>
+#include "keyValueStore.h"
+#include "shMem.h"
 #define BUFFSIZE 256 // Größe des Buffers
 #define STORAGESIZE 5 // Größe des Storage
 #define TRUE 1
 #define ENDLOSSCHLEIFE 1
 #define PORT 5678
-#define SEGSIZE 10000
-
-typedef struct kv_storage {
-    char key[BUFFSIZE];
-    char value[BUFFSIZE];
-    int index;
-} kv_storage, *kv_storage_p;
 
 kv_storage storage[STORAGESIZE];
 
@@ -29,30 +22,8 @@ int main(void) {
     int rfd; // Rendevouz-Descriptor
     int cfd; // Verbindungs-Descriptor
 
-    int shm_id;
-    kv_storage *shm_seg; /*  id für das Shared Memory Segment        */
-    /*  mit *shar_mem kann der im Shared Memory */
-    /*  gespeicherte Wert verändert werden      */
     int pid;
 
-    /* Nun wird das Shared Memory Segment angefordert, an den Prozess   */
-    /* angehängt, und der dort gespreicherte Wert auf 0 gesetzt         */
-    shm_id = shmget(IPC_PRIVATE, SEGSIZE, IPC_CREAT | 0600);
-    if (shm_id < 0) {
-        fprintf(stderr, "shmget: %s", strerror(errno));
-    }
-
-    shm_seg = (kv_storage *) shmat(shm_id, NULL, 0);
-    if (shm_seg == (void *) -1) {
-        fprintf(stderr, "shmat: %s", strerror(errno));
-        exit(1);
-    }
-
-    for (int i = 0; i <= 5; i++) {
-        shm_seg[i].index = i;
-        strcpy(shm_seg[i].key, " ");
-        strcpy(shm_seg[i].value, "*");
-    }
 
     // BEGIN testdaten für storage
     shm_seg[0].index = 0;

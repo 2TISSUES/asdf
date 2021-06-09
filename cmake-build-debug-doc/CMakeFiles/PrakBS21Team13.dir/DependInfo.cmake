@@ -4,7 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/tmp/PrakBS21/keyValueStore.c" "/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/PrakBS21Team13.dir/keyValueStore.c.o"
   "/tmp/PrakBS21/main.c" "/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/PrakBS21Team13.dir/main.c.o"
+  "/tmp/PrakBS21/shMem.c" "/tmp/PrakBS21/cmake-build-debug-doc/CMakeFiles/PrakBS21Team13.dir/shMem.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

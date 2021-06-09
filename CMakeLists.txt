@@ -3,4 +3,4 @@ project(PrakBS21Team13 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PrakBS21Team13 main.c)
+add_executable(PrakBS21Team13 main.c keyValueStore.h keyValueStore.c shMem.c shMem.h)

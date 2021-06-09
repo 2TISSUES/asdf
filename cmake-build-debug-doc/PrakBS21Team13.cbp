@@ -78,7 +78,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/tmp/PrakBS21/keyValueStore.c">
+			<Option target="PrakBS21Team13"/>
+		</Unit>
+		<Unit filename="/tmp/PrakBS21/keyValueStore.h">
+			<Option target="PrakBS21Team13"/>
+		</Unit>
 		<Unit filename="/tmp/PrakBS21/main.c">
+			<Option target="PrakBS21Team13"/>
+		</Unit>
+		<Unit filename="/tmp/PrakBS21/shMem.c">
+			<Option target="PrakBS21Team13"/>
+		</Unit>
+		<Unit filename="/tmp/PrakBS21/shMem.h">
 			<Option target="PrakBS21Team13"/>
 		</Unit>
 		<Unit filename="/tmp/PrakBS21/CMakeLists.txt">
