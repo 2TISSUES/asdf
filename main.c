@@ -138,21 +138,6 @@ int main(void) {
                     printf("Ändere Daten bei Index 0....\n");
                     strcpy(shm_seg[0].key, "LMAO");
                     strcpy(shm_seg[0].value, "IT WORKS");
-                } else if (strncmp("ADD", in, 3) == 0) {
-                    for (int i = 0; i <= 5; i++) {
-                        char str1[] = " ";
-                        char str2[] = "*";
-                        if ((strcmp(shm_seg[i].key, str1) != 0) && (strcmp(shm_seg[i].value, str2) != 0)) {
-                            printf("Index gefüllt\n");
-                        } else {
-                            printf("Index nicht gefüllt\n");
-                            printf("DATA: Index: %d, Key: %s, Value: %s\n", shm_seg[i].index, shm_seg[i].key,
-                                   shm_seg[i].value);
-                            strcpy(shm_seg[i].key, key);
-                            strcpy(shm_seg[i].value, value);
-                            break;
-                        }
-                    }
                 }
                 bytes_read = read(cfd, in, BUFFSIZE);
             }
