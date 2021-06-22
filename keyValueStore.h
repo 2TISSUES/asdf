@@ -1,19 +1,27 @@
-#ifndef PRAKBS21TEAM13_KEYVALUESTORE_H
-#define PRAKBS21TEAM13_KEYVALUESTORE_H
+//
+// Created by Mert Mutlu on 21.06.2021.
+//
 
-#endif //PRAKBS21TEAM13_KEYVALUESTORE_H
-
-#define BUFFSIZE 256 // Größe des Buffers
-#define STORAGESIZE 5 // Größe des Storage
-
+#ifndef SERVER_KEYVALUESTORE_H
+#define SERVER_KEYVALUESTORE_H
+#define BUFFSIZE 50 // Größe des Buffers
+#define STORAGESIZE 50 // Größe des Storage
 
 typedef struct kv_storage {
     char key[BUFFSIZE];
     char value[BUFFSIZE];
-    int index;
 } kv_storage, *kv_storage_p;
 
-void get(char * key);
-void put(char * key, char * value, int index);
-void del(char * key);
-void quit();
+kv_storage storage[STORAGESIZE];
+kv_storage *shm_seg;
+
+
+void createValueStore();
+int GET(char* key, char* res);
+int PUT();
+int DEL();
+void QUIT();
+
+
+
+#endif //SERVER_KEYVALUESTORE_H

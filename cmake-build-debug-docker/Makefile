@@ -123,87 +123,6 @@ PrakBS21Team13/fast:
 	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/build
 .PHONY : PrakBS21Team13/fast
 
-keyValueStore.o: keyValueStore.c.o
-
-.PHONY : keyValueStore.o
-
-# target to build an object file
-keyValueStore.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/keyValueStore.c.o
-.PHONY : keyValueStore.c.o
-
-keyValueStore.i: keyValueStore.c.i
-
-.PHONY : keyValueStore.i
-
-# target to preprocess a source file
-keyValueStore.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/keyValueStore.c.i
-.PHONY : keyValueStore.c.i
-
-keyValueStore.s: keyValueStore.c.s
-
-.PHONY : keyValueStore.s
-
-# target to generate assembly for a file
-keyValueStore.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/keyValueStore.c.s
-.PHONY : keyValueStore.c.s
-
-main.o: main.c.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/main.c.s
-.PHONY : main.c.s
-
-shMem.o: shMem.c.o
-
-.PHONY : shMem.o
-
-# target to build an object file
-shMem.c.o:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/shMem.c.o
-.PHONY : shMem.c.o
-
-shMem.i: shMem.c.i
-
-.PHONY : shMem.i
-
-# target to preprocess a source file
-shMem.c.i:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/shMem.c.i
-.PHONY : shMem.c.i
-
-shMem.s: shMem.c.s
-
-.PHONY : shMem.s
-
-# target to generate assembly for a file
-shMem.c.s:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/shMem.c.s
-.PHONY : shMem.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +132,6 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... PrakBS21Team13"
 	@echo "... edit_cache"
-	@echo "... keyValueStore.o"
-	@echo "... keyValueStore.i"
-	@echo "... keyValueStore.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... shMem.o"
-	@echo "... shMem.i"
-	@echo "... shMem.s"
 .PHONY : help
 
 
