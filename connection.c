@@ -1,7 +1,3 @@
-//
-// Created by Mert Mutlu on 21.06.2021.
-//
-
 #include "connection.h"
 #include <unistd.h>
 #include <sys/types.h>
@@ -68,6 +64,7 @@ int clientConnection () {
 
         // Verbindung eines Clients wird entgegengenommen
         cfd = accept(rfd, (struct sockaddr *) &client, &client_len);
+        printf("cfd: %d\n", cfd);
         if (cfd < 0) {
             fprintf(stderr, "accept: %s\n", strerror(errno));
         } else {
@@ -91,11 +88,10 @@ int clientConnection () {
             if(strncmp("GET", in, 3) == 0) {
                 printf("GET aufgerufen\n");
                 char res[50];
-                char* key = strtok(in+3, " ");
-                //value = strtok(NULL, "\0");
+
+                char* key = strtok(in+3, " "); // GET hallo'\0'\n\0
+                key[strlen(key)-2] = '\0'; // key[5] = '\0'; für "hallo'\0'"
                 GET(key, res);
-                printf("Hello world\n");
-                printf("Der Value für den Key KEY1: %s\n", res);
                 char str[80];
                 strcpy(str, "GET:");
                 strcat(str, key);
@@ -105,8 +101,21 @@ int clientConnection () {
             }
 
             if(strncmp("PUT", in, 3) == 0) {
-                PUT();
-                write(cfd, "PUT VALUE\n", 10);
+                printf("PUT aufgerufen\n");
+
+                char* key = strtok(in+3, " "); // GET hallo'\0'\n\0
+                //key[strlen(key)-2] = '\0'; // key[5] = '\0'; für "hallo'\0'"
+
+                char* value = strtok(in+3+strlen(key)+2, " ");
+                printf("%s - %s\n", key, value);
+                value[strlen(value)-2] = '\0';
+                PUT(key, value);
+                char str[80];
+                strcpy(str, "GET:");
+                strcat(str, key);
+                strcat(str, ":");
+//                strcat(str, res);
+                write(cfd, str, strlen(str));
             }
 
 

@@ -1,7 +1,3 @@
-//
-// Created by Mert Mutlu on 21.06.2021.
-//
-
 #ifndef SERVER_KEYVALUESTORE_H
 #define SERVER_KEYVALUESTORE_H
 #define BUFFSIZE 50 // Größe des Buffers

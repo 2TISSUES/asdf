@@ -1,13 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "connection.h"
 #include "keyValueStore.h"
-#define TRUE 1
-#define ENDLOSSCHLEIFE 1
-#define PORT 5678
-
-
-//kv_storage storage[STORAGESIZE];
 
 int main(void) {
     createValueStore();

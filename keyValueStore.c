@@ -1,7 +1,3 @@
-//
-// Created by Mert Mutlu on 21.06.2021.
-//
-
 #include "stdio.h"
 #include "keyValueStore.h"
 #include <sys/shm.h>
@@ -12,17 +8,11 @@
 
 int GET(char* key, char* res) {
     printf("KVSTORE: GET wird von KeyValueStore ausgefuehrt\n");
-    //printf("KEY: %s\n", key);
-    //printf("%d\n", STORAGESIZE);
+    printf("KEY: %s\n", key);
     for(int i=0; i < STORAGESIZE; i++) {
-        //printf("%d\n", i);
-        //printf("Key: %s\n", shm_seg[i].key);
-        //printf("Value: %s\n", shm_seg[i].value);
         if (strncmp(shm_seg[i].key, key, strlen(key)) == 0) {
-            //printf("hallo\n");
             strcpy(res, shm_seg[i].value);
-            //memcpy(res, shm_seg[i].value, 0);
-            printf("RES: %s\n", res);
+            printf("DEr Gesuchte Key wurde gefunden: %s\n", res);
             return 0;
         }
     }
@@ -100,6 +90,10 @@ void createValueStore() {
     //shm_seg[2].index = 2;
     strcpy(shm_seg[2].key, "KEY3");
     strcpy(shm_seg[2].value, "VALUE3");
+
+    strcpy(shm_seg[3].key, "hallo");
+    strcpy(shm_seg[3].value, "arrivederci");
+
 // ENDE testdaten für storage
 }
 
