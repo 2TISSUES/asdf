@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/PrakBS21/team13
+CMAKE_SOURCE_DIR = /tmp/tmp.zzUATUCzk0
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/PrakBS21/team13/cmake-build-debug-docker
+CMAKE_BINARY_DIR = /tmp/tmp.zzUATUCzk0/cmake-build-debug-docker
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.zzUATUCzk0/cmake-build-debug-docker/CMakeFiles /tmp/tmp.zzUATUCzk0/cmake-build-debug-docker/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/PrakBS21/team13/cmake-build-debug-docker/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.zzUATUCzk0/cmake-build-debug-docker/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,98 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named PrakBS21Team13
+# Target rules for targets named server
 
 # Build rule for target.
-PrakBS21Team13: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 PrakBS21Team13
-.PHONY : PrakBS21Team13
+server: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 server
+.PHONY : server
 
 # fast build rule for target.
-PrakBS21Team13/fast:
-	$(MAKE) -f CMakeFiles/PrakBS21Team13.dir/build.make CMakeFiles/PrakBS21Team13.dir/build
-.PHONY : PrakBS21Team13/fast
+server/fast:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+connection.o: connection.c.o
+
+.PHONY : connection.o
+
+# target to build an object file
+connection.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/connection.c.o
+.PHONY : connection.c.o
+
+connection.i: connection.c.i
+
+.PHONY : connection.i
+
+# target to preprocess a source file
+connection.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/connection.c.i
+.PHONY : connection.c.i
+
+connection.s: connection.c.s
+
+.PHONY : connection.s
+
+# target to generate assembly for a file
+connection.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/connection.c.s
+.PHONY : connection.c.s
+
+keyValueStore.o: keyValueStore.c.o
+
+.PHONY : keyValueStore.o
+
+# target to build an object file
+keyValueStore.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/keyValueStore.c.o
+.PHONY : keyValueStore.c.o
+
+keyValueStore.i: keyValueStore.c.i
+
+.PHONY : keyValueStore.i
+
+# target to preprocess a source file
+keyValueStore.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/keyValueStore.c.i
+.PHONY : keyValueStore.c.i
+
+keyValueStore.s: keyValueStore.c.s
+
+.PHONY : keyValueStore.s
+
+# target to generate assembly for a file
+keyValueStore.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/keyValueStore.c.s
+.PHONY : keyValueStore.c.s
+
+main.o: main.c.o
+
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.s
+.PHONY : main.c.s
 
 # Help Target
 help:
@@ -130,8 +211,17 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... PrakBS21Team13"
+	@echo "... server"
 	@echo "... edit_cache"
+	@echo "... connection.o"
+	@echo "... connection.i"
+	@echo "... connection.s"
+	@echo "... keyValueStore.o"
+	@echo "... keyValueStore.i"
+	@echo "... keyValueStore.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

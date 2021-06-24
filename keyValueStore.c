@@ -12,49 +12,43 @@ int GET(char* key, char* res) {
     for(int i=0; i < STORAGESIZE; i++) {
         if (strncmp(shm_seg[i].key, key, strlen(key)) == 0) {
             strcpy(res, shm_seg[i].value);
-            printf("DEr Gesuchte Key wurde gefunden: %s\n", res);
-            return 0;
+            printf("Der Gesuchte Key wurde gefunden: %s\n", res);
+            return 1;
         }
     }
-    return -1;
+    return 0;
 }
 
 int PUT(char* key, char* value) {
     printf("KVSTORE: PUT wird von KeyValueStore ausgefuehrt\n");
+    for(int i=0; i < STORAGESIZE; i++) {
+        if (strncmp(shm_seg[i].key, key, strlen(key)) == 0) {
+            strcpy(shm_seg[i].value, value);
+            return 1;
+        }
+    }
 
     for(int i=0; i < STORAGESIZE; i++) {
-        //printf("Key: %s\n", shm_seg[i].key);
-        //printf("Value: %s\n", shm_seg[i].value);
         if (strncmp(shm_seg[i].key, " ", 1) == 0) {
             strcpy(shm_seg[i].key, key);
             strcpy(shm_seg[i].value, value);
-            return 0;
+            return 1;
         }
     }
-    //shm_seg[2].index = 2;
-    return -1;
+    return 0;
 }
 
 int DEL(char* key) {
     printf("KVSTORE: DEL wird von KeyValueStore ausgefuehrt\n");
 
     for(int i=0; i < STORAGESIZE; i++) {
-        //printf("Key: %s\n", shm_seg[i].key);
-        //printf("Value: %s\n", shm_seg[i].value);
         if (strncmp(shm_seg[i].key, key, strlen(key)) == 0) {
             strcpy(shm_seg[i].key, " ");
             strcpy(shm_seg[i].value, "*");
-            return 0;
+            return 1;
         }
     }
-    //shm_seg[2].index = 2;
-    return -1;
-}
-
-
-
-void UPDATE() {
-    printf("KVSTORE: UPDATE wird von KeyValueStore ausgefuehrt\n");
+    return 0;
 }
 
 void createValueStore() {
