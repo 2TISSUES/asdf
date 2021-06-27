@@ -3,6 +3,7 @@
 #define PORT 5678
 #define ENTER 1
 #define LEAVE 0
+#include "stdio.h"
 
 int clientConnection ();
 void initServer();

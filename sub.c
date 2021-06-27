@@ -208,8 +208,7 @@ int clientConnection () {
                     printf("GET aufgerufen\n");
                     char res[50];
                     bzero(res, 50);
-                    char *key = strtok(in + 3, " "); // GET hallo'\0'\n\0
-                    //key[strlen(key)-2] = '\0'; // key[5] = '\0'; für "hallo'\0'"
+                    char *key = strtok(in + 3, " ");
                     if(!GET(key, res)) {
                         strcpy(res, "key_nonexistent");
                     }
@@ -229,7 +228,8 @@ int clientConnection () {
 
                     char *value = strtok(in + 3 + strlen(key) + 2, " ");
                     printf("%s - %s\n", key, value);
-                    PUT(key, value);
+                    int subs[SUBSIZE];
+                    PUT(key, value, subs);
                     char str[80];
                     strcpy(str, "PUT:");
                     strcat(str, key);
@@ -237,6 +237,12 @@ int clientConnection () {
                     strcat(str, value);
                     strcat(str, "\n");
                     write(cfd, str, strlen(str));
+                    for(int i = 0; i < SUBSIZE; i++) {
+                        printf("sub: %i\n", subs[i]);
+                        if(subs[i] >= 0){
+                            write(subs[i], str, strlen(str));
+                        }
+                    }
                 }
 
                 if (strncmp("DEL", in, 3) == 0) {
@@ -244,8 +250,8 @@ int clientConnection () {
                     char res[50];
                     bzero(res, 50);
                     char *key = strtok(in + 3, " ");
-
-                    if(!DEL(key)) {
+                    int subs[SUBSIZE];
+                    if(!DEL(key, subs)) {
                         strcpy(res, "key_nonexistent");
                     } else {
                         strcpy(res, "key_deleted");
@@ -258,10 +264,35 @@ int clientConnection () {
                     strcat(str, res);
                     strcat(str, "\n");
                     write(cfd, str, strlen(str));
+
+                    for(int i = 0; i < SUBSIZE; i++) {
+                        //printf("sub: %i\n", subs[i]);
+                        if (subs[i] >= 0) {
+                            write(subs[i], str, strlen(str));
+                        }
+                    }
+                }
+
+                if (strncmp("SUB", in, 3) == 0) {
+                    printf("SUB aufgerufen\n");
+                    char res[50];
+                    bzero(res, 50);
+                    char *key = strtok(in + 3, " ");
+                    if(!SUB(key, res, cfd)) {
+                        strcpy(res, "key_nonexistent");
+                    }
+                    char str[80];
+                    strcpy(str, "SUB:");
+                    strcat(str, key);
+                    strcat(str, ":");
+                    strcat(str, res);
+                    strcat(str, "\n");
+                    write(cfd, str, strlen(str));
                 }
 
                 if (strncmp("QUIT", in, 4) == 0) {
                     close(cfd);
+                    QUIT(cfd);
                     exit(EXIT_SUCCESS);
                 }
 
