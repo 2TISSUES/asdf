@@ -1,7 +1,7 @@
 #ifndef SERVER_KEYVALUESTORE_H
 #define SERVER_KEYVALUESTORE_H
-#define BUFFSIZE 50 // Größe des Buffers
-#define STORAGESIZE 50 // Größe des Storage
+#define BUFFSIZE 50 // Groeße des Buffers
+#define STORAGESIZE 50 // Groeße des Storage
 
 typedef struct kv_storage {
     char key[BUFFSIZE];
@@ -10,7 +10,8 @@ typedef struct kv_storage {
 
 kv_storage storage[STORAGESIZE];
 kv_storage *shm_seg;
-
+int *counter;
+int shmid_ctr;
 
 void createValueStore();
 int GET(char* key, char* res);

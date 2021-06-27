@@ -3,4 +3,4 @@ project(server C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(server main.c connection.c connection.h keyValueStore.c keyValueStore.h)
+add_executable(server main.c sub.c sub.h keyValueStore.c keyValueStore.h)

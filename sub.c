@@ -1,30 +1,63 @@
-#include "connection.h"
 #include <unistd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <errno.h>
 #include <sys/ipc.h>
 #include <sys/wait.h>
-#include "stdlib.h"
-#include "keyValueStore.h"
+#include <sys/sem.h>
+#include <sys/shm.h>
+#include <stdbool.h>
 
-#define BUFFSIZE 256 // Größe des Buffers
+#include "keyValueStore.h"
+#include "sub.h"
+
+#define BUFF 256 // Größe des Buffers
 #define MAX_NUM_OF_CLIENTS 25
+
+union semun {
+    int val;
+    struct semid_ds *buf;
+    ushort *array;
+};
 
 int rfd; // Rendevouz-Descriptor
 int cfd; // Verbindungs-Descriptor
 int pid;
+int semID, transID;
+unsigned short signals[1];
+bool myTrans = false;
 
 struct sockaddr_in client; // Socketadresse eines Clients
 socklen_t client_len; // Länge der Client-Daten
-char in[BUFFSIZE]; // Daten vom Client an den Server
-char buff[BUFFSIZE]; // String-Buffer
+char in[BUFF]; // Daten vom Client an den Server
+char buff[BUFF]; // String-Buffer
 int bytes_read; // Anzahl der Bytes, die der Client geschickt hat
 
+void exitHandler (int s)
+{
+    printf("test: %i", s);
+    clearAll();
+    exit(1);
+}
+
+void setupExitHandler() {
+    struct sigaction sigIntHandler;
+
+    sigIntHandler.sa_handler = exitHandler;
+    sigemptyset(&sigIntHandler.sa_mask);
+    sigIntHandler.sa_flags = 0;
+
+    sigaction(SIGINT, &sigIntHandler, NULL);
+}
+
 void initServer() {
+
+    setupExitHandler();
     // Socket erstellen
     rfd = socket(AF_INET, SOCK_STREAM, 0);
     if (rfd < 0) {
@@ -59,10 +92,88 @@ void initServer() {
 }
 
 
+void clearAll() {
+    if (semctl(semID, 0, IPC_RMID) == -1) {
+        perror("semctl");
+        exit(1);
+    }
+    if (semctl(transID, 0, IPC_RMID) == -1) {
+        perror("semctl");
+        exit(1);
+    }
+    if (shmdt(shm_seg) == -1) {
+        perror("shmdt");
+        exit(1);
+    }
+}
+
+int initSemaphore() {
+    union semun arg;
+    semID = semget(IPC_PRIVATE, 1, IPC_CREAT | 0644);
+    if (semID == -1) {
+        printf("Semaphorengruppe konnte nicht erzeugt werden!\n");
+        return 2;
+    }
+
+    transID = semget(IPC_PRIVATE, 1, IPC_CREAT | 0644);
+    if(transID == -1) {
+        printf("Semaphorengruppe konnte nicht erzeugt werden!\n");
+        return 2;
+    }
+
+    signals[0] = 1;
+    arg.val = 1;
+    semctl(transID, 0, SETALL, signals);
+    semctl(semID, 0, SETALL, signals);
+    return 1;
+}
+
+void semOP( int op ) {
+    printf("asdfasdf\n");
+    getSemVal("problem");
+    struct sembuf buf [1];
+    buf[0].sem_num = 0;
+    buf[0].sem_flg = SEM_UNDO;
+    buf[0].sem_op = 1;
+
+    if(op) {
+        buf[0].sem_op = -1;
+    }
+
+    if (semop(semID, buf, 1) == -1) {
+        perror("semop");
+        exit(1);
+    }
+}
+
+
+void transOP (int op) {
+    struct sembuf trans;
+    trans.sem_num = 0;
+    trans.sem_flg = SEM_UNDO;
+    trans.sem_op = 1;
+
+    if(op) {
+        trans.sem_op = -1;
+    }
+
+    if (semop(transID, &trans, 1) == -1) {
+        perror("semop");
+        exit(1);
+    }
+}
+
+void getSemVal( char* msg) {
+    printf("semVal %s: %d\n", msg, semctl(semID, 0, GETVAL));
+}
+
+void getTransVal( char* msg) {
+    printf("transVal %s: %d\n", msg, semctl(transID, 0, GETVAL));
+}
+
+
 int clientConnection () {
-
     while (1) {
-
         // Verbindung eines Clients wird entgegengenommen
         cfd = accept(rfd, (struct sockaddr *) &client, &client_len);
         printf("cfd: %d\n", cfd);
@@ -70,7 +181,6 @@ int clientConnection () {
             fprintf(stderr, "accept: %s\n", strerror(errno));
         } else {
             printf("verbindung zu %s hergestellt\n", inet_ntop(AF_INET, &client.sin_addr, buff, sizeof(buff)));
-            write(cfd, "Verbindung zum KVSTORE hergestellt\n", 35);
         }
 
         pid = fork();
@@ -80,14 +190,18 @@ int clientConnection () {
         }
 
         if (pid == 0) { // Kindprozess
-            printf("Im Kindprozess\n");
             // Lesen von Daten, die der Client schickt
             close(rfd);
-            if ((bytes_read = read(cfd, in, BUFFSIZE)) < 0) {
+            if ((bytes_read = read(cfd, in, BUFF)) < 0) {
                 fprintf(stderr, "read: %s\n", strerror(errno));
             }
 
             while(bytes_read > 0) {
+                if(!myTrans) {
+                    transOP(ENTER);
+                    transOP(LEAVE);
+                }
+
                 in[strcspn(in, "\r\n")] = 0;
 
                 if (strncmp("GET", in, 3) == 0) {
@@ -151,22 +265,23 @@ int clientConnection () {
                     exit(EXIT_SUCCESS);
                 }
 
-                printf("sending back the %d bytes I received...\n", bytes_read);
+                if (strncmp("BEG", in, 3) == 0) {
+                    transOP(ENTER);
+                    myTrans = true;
+                }
 
-                //write(cfd, in, bytes_read);
-                bytes_read = read(cfd, in, BUFFSIZE);
-                printf("CLIENT ANFRAGE: %s\n", in);
-                // Zurückschicken der Daten, solange der Client welche schickt (und kein Fehler passiert)
-                /*while (bytes_read > 0) {
-                    if (strncmp("GET", in, 3) == 0) {
-                        printf("GET key wird ausgeführt...\n");
-                        GET();
-                    }
-                }*/
+                if (strncmp("END", in, 3) == 0) {
+                    myTrans = false;
+                    transOP(LEAVE);
+                }
+
+                bytes_read = read(cfd, in, BUFF);
             }
         }
         close(cfd);
     }
+
     close(rfd);
     return EXIT_SUCCESS;
 }
+
