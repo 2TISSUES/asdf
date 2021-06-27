@@ -4,5 +4,6 @@
 int main(void) {
     createValueStore();
     initSemaphore();
+    initMQ();
     initServer();
 }

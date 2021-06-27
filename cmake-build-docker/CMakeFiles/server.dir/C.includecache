@@ -25,6 +25,8 @@ unistd.h
 -
 
 /root/tmp/PrakBS21/keyValueStore.h
+unistd.h
+-
 
 /root/tmp/PrakBS21/main.c
 sub.h
@@ -58,6 +60,10 @@ sys/wait.h
 sys/sem.h
 -
 sys/shm.h
+-
+stdbool.h
+-
+sys/msg.h
 -
 keyValueStore.h
 /root/tmp/PrakBS21/keyValueStore.h
