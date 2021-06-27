@@ -10,11 +10,6 @@ typedef struct kv_storage {
     char value[BUFFSIZE];
 } kv_storage, *kv_storage_p;
 
-/*struct data {
-    char key[30];
-    char value[80];
-};*/
-
 typedef struct subMsg {
     long subPid;
     char msg[80];
@@ -28,13 +23,6 @@ typedef struct subData {
 typedef struct subscriptions {
     subData subs[STORAGESIZE];
 }subscriptions;
-
-/*struct keyValStore {
-    struct data storePos[20];
-    struct subs subPos[10];
-    int currentEntries;
-    pid_t begPid;
-};*/
 
 kv_storage storage[STORAGESIZE];
 kv_storage *shm_seg;
