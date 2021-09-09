@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/root/tmp/PrakBS21/keyValueStore.c" "/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/keyValueStore.c.o"
-  "/root/tmp/PrakBS21/main.c" "/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/main.c.o"
-  "/root/tmp/PrakBS21/sub.c" "/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/sub.c.o"
+  "/tmp/PrakBS21/keyValueStore.c" "/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/keyValueStore.c.o"
+  "/tmp/PrakBS21/main.c" "/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/main.c.o"
+  "/tmp/PrakBS21/sub.c" "/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/sub.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

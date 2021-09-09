@@ -23,10 +23,12 @@ sub.h
 /root/tmp/PrakBS21/sub.h
 unistd.h
 -
+sys/msg.h
+-
 
 /root/tmp/PrakBS21/keyValueStore.h
 unistd.h
--
+/root/tmp/PrakBS21/unistd.h
 
 /root/tmp/PrakBS21/main.c
 sub.h
@@ -71,4 +73,6 @@ sub.h
 /root/tmp/PrakBS21/sub.h
 
 /root/tmp/PrakBS21/sub.h
+stdio.h
+/root/tmp/PrakBS21/stdio.h
 

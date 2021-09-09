@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/tmp/PrakBS21
+CMAKE_SOURCE_DIR = /tmp/PrakBS21
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/tmp/PrakBS21/cmake-build-docker
+CMAKE_BINARY_DIR = /tmp/PrakBS21/cmake-build-docker
 
 # Include any dependencies generated for this target.
 include CMakeFiles/server.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/server.dir/flags.make
 
 CMakeFiles/server.dir/main.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/main.c.o   -c /root/tmp/PrakBS21/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/server.dir/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/main.c.o   -c /tmp/PrakBS21/main.c
 
 CMakeFiles/server.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/tmp/PrakBS21/main.c > CMakeFiles/server.dir/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/PrakBS21/main.c > CMakeFiles/server.dir/main.c.i
 
 CMakeFiles/server.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/tmp/PrakBS21/main.c -o CMakeFiles/server.dir/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/PrakBS21/main.c -o CMakeFiles/server.dir/main.c.s
 
 CMakeFiles/server.dir/main.c.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/server.dir/main.c.o.provides.build: CMakeFiles/server.dir/main.c.o
 
 CMakeFiles/server.dir/sub.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/sub.c.o: ../sub.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/sub.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/sub.c.o   -c /root/tmp/PrakBS21/sub.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/sub.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/sub.c.o   -c /tmp/PrakBS21/sub.c
 
 CMakeFiles/server.dir/sub.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/sub.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/tmp/PrakBS21/sub.c > CMakeFiles/server.dir/sub.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/PrakBS21/sub.c > CMakeFiles/server.dir/sub.c.i
 
 CMakeFiles/server.dir/sub.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/sub.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/tmp/PrakBS21/sub.c -o CMakeFiles/server.dir/sub.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/PrakBS21/sub.c -o CMakeFiles/server.dir/sub.c.s
 
 CMakeFiles/server.dir/sub.c.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/server.dir/sub.c.o.provides.build: CMakeFiles/server.dir/sub.c.o
 
 CMakeFiles/server.dir/keyValueStore.c.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/keyValueStore.c.o: ../keyValueStore.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/keyValueStore.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/keyValueStore.c.o   -c /root/tmp/PrakBS21/keyValueStore.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/server.dir/keyValueStore.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/server.dir/keyValueStore.c.o   -c /tmp/PrakBS21/keyValueStore.c
 
 CMakeFiles/server.dir/keyValueStore.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/server.dir/keyValueStore.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/tmp/PrakBS21/keyValueStore.c > CMakeFiles/server.dir/keyValueStore.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /tmp/PrakBS21/keyValueStore.c > CMakeFiles/server.dir/keyValueStore.c.i
 
 CMakeFiles/server.dir/keyValueStore.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/server.dir/keyValueStore.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/tmp/PrakBS21/keyValueStore.c -o CMakeFiles/server.dir/keyValueStore.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /tmp/PrakBS21/keyValueStore.c -o CMakeFiles/server.dir/keyValueStore.c.s
 
 CMakeFiles/server.dir/keyValueStore.c.o.requires:
 
@@ -143,7 +143,7 @@ server: CMakeFiles/server.dir/sub.c.o
 server: CMakeFiles/server.dir/keyValueStore.c.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/PrakBS21/cmake-build-docker/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -162,6 +162,6 @@ CMakeFiles/server.dir/clean:
 .PHONY : CMakeFiles/server.dir/clean
 
 CMakeFiles/server.dir/depend:
-	cd /root/tmp/PrakBS21/cmake-build-docker && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/tmp/PrakBS21 /root/tmp/PrakBS21 /root/tmp/PrakBS21/cmake-build-docker /root/tmp/PrakBS21/cmake-build-docker /root/tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /tmp/PrakBS21/cmake-build-docker && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/PrakBS21 /tmp/PrakBS21 /tmp/PrakBS21/cmake-build-docker /tmp/PrakBS21/cmake-build-docker /tmp/PrakBS21/cmake-build-docker/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/server.dir/depend
 

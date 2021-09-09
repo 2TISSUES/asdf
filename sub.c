@@ -38,6 +38,8 @@ void exitHandler (int s)
 {
     printf("test: %i", s);
     clearAll();
+    close(rfd);
+    close(cfd);
     exit(1);
 }
 
@@ -96,7 +98,15 @@ void clearAll() {
         perror("semctl");
         exit(1);
     }
+    if (semctl(subID, 0, IPC_RMID) == -1) {
+        perror("semctl");
+        exit(1);
+    }
     if (shmdt(shm_seg) == -1) {
+        perror("shmdt");
+        exit(1);
+    }
+    if (shmdt(shm_seg_subs) == -1) {
         perror("shmdt");
         exit(1);
     }
@@ -129,7 +139,7 @@ int initSemaphore() {
         printf("Semaphorengruppe konnte nicht erzeugt werden!\n");
         return 2;
     }
-
+ 
     signals[0] = 1;
     arg.val = 1;
     semctl(semID, 0, SETALL, signals);
@@ -209,6 +219,7 @@ int clientConnection () {
             printf("verbindung zu %s hergestellt\n", inet_ntop(AF_INET, &client.sin_addr, buff, sizeof(buff)));
         }
 
+        // A2, Teil a) erster Fork-Aufruf
         pid = fork();
         if (pid < 0) {
             fprintf(stderr, "fork: %s\n", strerror(errno));
@@ -219,6 +230,8 @@ int clientConnection () {
             // Lesen von Daten, die der Client schickt
             close(rfd);
             int clientPID = getpid();
+            
+            // A2, Teil a) zweiter Fork-Aufruf 
             int subPid = fork();
             if (subPid == 0) {
                 while(1) {
@@ -230,7 +243,6 @@ int clientConnection () {
                         continue;
                     }
                     printf("sending subbed msg: %s\n", mySubMsg.msg);
-                    //mySubMsg.msg[strcspn(mySubMsg.msg, "\r\n")] = '\n';
                     write(cfd, mySubMsg.msg, strlen(mySubMsg.msg));
                 }
             }
@@ -261,15 +273,11 @@ int clientConnection () {
                             strcpy(res, "key_nonexistent");
                         }
                         char str[80];
-                        strcpy(str, "GET:");
-                        strcat(str, key);
-                        strcat(str, ":");
-                        strcat(str, res);
-                        strcat(str, "\n");
+                        sprintf(str, "GET:%s:%s\n", key, res);
                         write(cfd, str, strlen(str));
                     }
 
-                    if (strncmp("PUT", in, 3) == 0) {
+                    else if (strncmp("PUT", in, 3) == 0) {
                         printf("PUT aufgerufen\n");
 
                         char *key = strtok(in + 3, " ");
@@ -278,16 +286,12 @@ int clientConnection () {
                         printf("%s - %s\n", key, value);
                         PUT(key, value);
                         char str[80];
-                        strcpy(str, "PUT:");
-                        strcat(str, key);
-                        strcat(str, ":");
-                        strcat(str, value);
-                        strcat(str, "\n");
+                        sprintf(str, "PUT:%s:%s\n", key, value);
                         notifySubs(key, str);
                         write(cfd, str, strlen(str));
                     }
 
-                    if (strncmp("DEL", in, 3) == 0) {
+                    else if (strncmp("DEL", in, 3) == 0) {
                         printf("DEL aufgerufen\n");
                         char res[50];
                         bzero(res, 50);
@@ -300,31 +304,32 @@ int clientConnection () {
                         }
 
                         char str[80];
-                        strcpy(str, "DEL:");
-                        strcat(str, key);
-                        strcat(str, ":");
-                        strcat(str, res);
-                        strcat(str, "\n");
+                        sprintf(str, "DEL:%s:%s\n", key, res);
                         notifySubs(key, str);
                         write(cfd, str, strlen(str));
                     }
 
-                    if (strncmp("QUIT", in, 4) == 0) {
+                    else if (strncmp("QUIT", in, 4) == 0) {
                         close(cfd);
-                        exit(EXIT_SUCCESS);
+                        kill(subPid, SIGKILL);
+                        exit(1);
                     }
 
-                    if (strncmp("BEG", in, 3) == 0) {
+                    else if (strncmp("BEG", in, 3) == 0) {
+                        getTransVal("BEG - vor ENTER");
                         transOP(ENTER);
+                        getTransVal("BEG - nach ENTER");
                         myTrans = true;
+                        write(cfd, "Began Transaction\n", strlen("Began Transaction\n"));
                     }
 
-                    if (strncmp("END", in, 3) == 0) {
+                    else if (strncmp("END", in, 3) == 0) {
                         myTrans = false;
                         transOP(LEAVE);
+                        write(cfd, "Ended Transaction\n", strlen("Ended Transaction\n"));
                     }
 
-                    if (strncmp("SUB", in, 3) == 0) {
+                    else if (strncmp("SUB", in, 3) == 0) {
                         printf("SUB aufgerufen\n");
                         char res[50];
                         bzero(res, 50);
@@ -335,16 +340,18 @@ int clientConnection () {
                             SUB(key);
                         }
                         char str[80];
-                        strcpy(str, "SUB:");
-                        strcat(str, key);
-                        strcat(str, ":");
-                        strcat(str, res);
-                        strcat(str, "\n");
+                        sprintf(str, "SUB:%s:%s\n", key, res);
                         write(cfd, str, strlen(str));
+                    } else {
+
+                        write(cfd, "Befehl nicht erkannt\n", strlen("Befehl nicht erkannt\n"));
                     }
+
                     bytes_read = read(cfd, in, BUFF);
+                    }
                 }
-            }
+            close(cfd);
+        }else{
             close(cfd);
         }
     }
